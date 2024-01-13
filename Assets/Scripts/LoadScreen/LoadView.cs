@@ -1,5 +1,4 @@
-﻿using System;
-using Extensions;
+﻿using Extensions;
 using MVP;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +11,8 @@ namespace LoadScreen {
 
         public void InitializeConfirmButton(UnityAction onClickAction) {
             _confirmButton.AddSingleListener(onClickAction);
+            _confirmButton.onClick.AddListener(()=>print("fff"));
+            
         }
     }
 }

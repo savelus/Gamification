@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadView: {fileID: 3677423479878192127, guid: b354733dea642804f8111f144f4129ed, type: 3}
+  _taskScreenView: {fileID: 2763643403735186209, guid: 4571e7ca18e7d2741a38df7d06fd0034, type: 3}
 --- !u!114 &364617028
 MonoBehaviour:
   m_ObjectHideFlags: 0

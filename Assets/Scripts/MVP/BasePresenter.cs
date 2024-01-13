@@ -1,12 +1,9 @@
 ﻿namespace MVP {
-    public abstract class BasePresenter<TView, TData> where TView : IView
-                                             where TData : IData {
+    public abstract class BasePresenter<TView> where TView : IView {
         protected TView View;
-        protected TData Data;
 
-        protected void InitializePresenter(IView view, IData data) {
+        protected void InitializePresenter(IView view) {
             View = (TView) view;
-            Data = (TData) data;
         }
 
         public void Open() {

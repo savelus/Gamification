@@ -1,18 +1,25 @@
 ﻿using MVP;
-using UnityEngine.SceneManagement;
-using UnityEngine.Scripting;
+using TaskScreen;
+using UnityEngine;
 
 namespace LoadScreen {
-    [Preserve]
-    public class LoadPresenter : BasePresenter<LoadView, LoadData> {
-        public LoadPresenter(LoadView view, LoadData data = null) {
-            if (data == null)
-                data = new LoadData();
-            InitializePresenter(view, data);
+    public class LoadPresenter : BasePresenter<LoadView> {
+        private readonly TaskScreenPresenter _taskScreenPresenter;
+
+        public LoadPresenter(LoadView view,
+            TaskScreenPresenter taskScreenPresenter) {
+            _taskScreenPresenter = taskScreenPresenter;
+            InitializePresenter(view);
         }
         
         protected override void InitializeView() {
-            View.InitializeConfirmButton(() => SceneManager.LoadScene(null));
+            View.InitializeConfirmButton(ButtonClickAction);
+        }
+
+        private void ButtonClickAction() {
+            Debug.Log("CloseButton");
+            Close();
+            _taskScreenPresenter.Open();
         }
     }
 }
