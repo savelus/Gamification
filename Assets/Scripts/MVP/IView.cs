@@ -1,5 +1,6 @@
 ﻿namespace MVP {
-    public interface IView {
+    public interface IView 
+    {
 
         void ShowView();
         void HideView();
