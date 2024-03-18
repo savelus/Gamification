@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace TaskScreen {
-    public class Task : MonoBehaviour {
+namespace TaskScreen 
+{
+    public class Task : MonoBehaviour 
+    {
         [SerializeField] private Button checkBoxButton;
         [SerializeField] private Image checkBoxImage;
         [SerializeField] private TextMeshProUGUI text;
@@ -21,7 +23,8 @@ namespace TaskScreen {
             Color checkBoxCompleteColor, 
             string taskText, 
             UnityAction<Task> taskStateChanged,
-            bool complete = false) {
+            bool complete = false) 
+        {
             
             _unCompleteColor = checkBoxColor;
             _completeColor = checkBoxCompleteColor;
@@ -33,20 +36,23 @@ namespace TaskScreen {
         }
 
 
-        private void TaskStateChanged() {
+        private void TaskStateChanged()
+        {
             TaskComplete = !TaskComplete;
             _taskStateChanged?.Invoke(this);
         }
         
         
-        public void UnCompleteTask() {
+        public void UnCompleteTask() 
+        {
             checkBoxImage.color = _unCompleteColor;
             text.fontStyle = FontStyles.Normal;
 
             TaskComplete = false;
         }
 
-        public void CompleteTask() {
+        public void CompleteTask() 
+        {
             checkBoxImage.color = _completeColor;
             text.fontStyle = FontStyles.Strikethrough;
 

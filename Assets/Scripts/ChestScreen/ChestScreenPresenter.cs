@@ -9,8 +9,8 @@ namespace ChestScreen
     {
         private const int StartSpawnChest = 5;
 
-        private readonly Queue<ChestM> _notUsableChests = new();
-        private readonly List<ChestM> _viewedChests = new();
+        private readonly Queue<Chest> _notUsableChests = new();
+        private readonly List<Chest> _viewedChests = new();
 
         public ChestScreenPresenter(ChestScreenView screenView)
         {
@@ -70,18 +70,18 @@ namespace ChestScreen
             _viewedChests.Clear();
         }
 
-        private void ChestStateChanged(ChestM chest)
+        private void ChestStateChanged(Chest chest)
         {
             if (chest.ChestComplete) CompleteChest(chest);
             UnCompleteChest(chest);
         }
 
-        private void UnCompleteChest(ChestM chest)
+        private void UnCompleteChest(Chest chest)
         {
             chest.UnCompleteChest();
         }
 
-        private void CompleteChest(ChestM chest)
+        private void CompleteChest(Chest chest)
         {
             chest.CompleteChest();
         }

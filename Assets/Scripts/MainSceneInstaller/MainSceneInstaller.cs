@@ -4,19 +4,23 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
 
-namespace MainSceneInstaller {
-    public class MainSceneInstaller : MonoInstaller {
+namespace MainSceneInstaller 
+{
+    public class MainSceneInstaller : MonoInstaller 
+    {
 
         [SerializeField] private LoadView _loadView;
         [SerializeField] private TaskScreenView _taskScreenView;
 
-        public override void InstallBindings() {
+        public override void InstallBindings() 
+        {
 
             InstallPresenters();
             InstallViews();
         }
 
-        private void InstallViews() {
+        private void InstallViews() 
+        {
 
             var f = _loadView.GetType();
             Instantiate(_loadView);
@@ -38,7 +42,8 @@ namespace MainSceneInstaller {
                 .NonLazy();
         }
 
-        private void InstallPresenters() {
+        private void InstallPresenters() 
+        {
             Container
                 .BindInterfacesAndSelfTo<LoadPresenter>()
                 .AsSingle()

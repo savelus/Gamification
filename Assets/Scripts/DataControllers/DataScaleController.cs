@@ -5,15 +5,15 @@ using DBUtils;
 
 public class DataScaleController
 {
-    public List<Scale> GetAllScales()
+    public List<DataScale> GetAllScales()
     {
         DataTable scalesTable = DatabaseManager.GetTable("SELECT * FROM Scales");
 
-        List<Scale> scales = new List<Scale>();
+        List<DataScale> scales = new List<DataScale>();
 
         foreach (DataRow row in scalesTable.Rows)
         {
-            Scale chestInScale = new Scale
+            DataScale chestInScale = new DataScale
             {
                 ID = Convert.ToInt32(row["ID"]),
                 ChestInScaleId = Convert.ToInt32(row["ChestInScaleId"]),
@@ -28,13 +28,13 @@ public class DataScaleController
         return scales;
     }
 
-    public void AddChestInScale(Scale scale)
+    public void AddChestInScale(DataScale scale)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO Scales ('ChestInScaleId', 'TaskInScale', 'AllPoints', 'CompletePoints') " +
             $"VALUES ('{scale.ChestInScaleId}', '{scale.TaskInScale}', '{scale.AllPoints}', '{scale.CompletePoints}');");
     }
 
-    public void UpdateChestInScale(Scale scale)
+    public void UpdateChestInScale(DataScale scale)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE Scales " +
             $"SET ChestInScaleId = '{scale.ChestInScaleId}' TaskInScale = '{scale.TaskInScale}' AllPoints = '{scale.AllPoints}' CompletePoints = '{scale.CompletePoints}'" +

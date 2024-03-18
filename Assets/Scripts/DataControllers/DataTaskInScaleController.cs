@@ -5,15 +5,15 @@ using DBUtils;
 
 public class DataTaskInScaleController
 {
-    public List<TaskInScale> GetAllTaskInScales()
+    public List<DataTaskInScale> GetAllTaskInScales()
     {
         DataTable chestInScalesTable = DatabaseManager.GetTable("SELECT * FROM TaskInScales");
 
-        List<TaskInScale> taskInScales = new List<TaskInScale>();
+        List<DataTaskInScale> taskInScales = new List<DataTaskInScale>();
 
         foreach (DataRow row in chestInScalesTable.Rows)
         {
-            TaskInScale taskInScale = new TaskInScale
+            DataTaskInScale taskInScale = new DataTaskInScale
             {
                 ID = Convert.ToInt32(row["ID"]),
                 TaskId = Convert.ToInt32(row["TaskId"]),
@@ -25,13 +25,13 @@ public class DataTaskInScaleController
         return taskInScales;
     }
 
-    public void AddTaskInScale(TaskInScale taskInScale)
+    public void AddTaskInScale(DataTaskInScale taskInScale)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO TaskInScales ('TaskId') " +
             $"VALUES ('{taskInScale.TaskId}');");
     }
 
-    public void UpdateTaskInScale(TaskInScale taskInScale)
+    public void UpdateTaskInScale(DataTaskInScale taskInScale)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE TaskInScales " +
             $"SET TaskId = '{taskInScale.TaskId}'" +

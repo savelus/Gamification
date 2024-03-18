@@ -5,15 +5,15 @@ using DBUtils;
 
 public class DataTeamController 
 {
-    public List<Team> GetAllTeams()
+    public List<DataTeam> GetAllTeams()
     {
         DataTable teamTable = DatabaseManager.GetTable("SELECT * FROM Teams");
 
-        List<Team> teams = new List<Team>();
+        List<DataTeam> teams = new List<DataTeam>();
 
         foreach (DataRow row in teamTable.Rows)
         {
-            Team team = new Team
+            DataTeam team = new DataTeam
             {
                 ID = Convert.ToInt32(row["ID"]),
                 Name = row["Name"].ToString(),
@@ -25,14 +25,14 @@ public class DataTeamController
         return teams;
     }
 
-    public void AddTeam(Team team)
+    public void AddTeam(DataTeam team)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO Teams ('Name') " +
             $"VALUES ('{team.Name}');");
 
     }
 
-    public void UpdateTeam(Team team)
+    public void UpdateTeam(DataTeam team)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE Teams " +
             $"SET Name = '{team.Name}'" +

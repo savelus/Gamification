@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class DataChestController 
 {
-    public List<ChestM> GetAllChests()
+    public List<DataChest> GetAllChests()
     {
         DataTable ChestsTable = DatabaseManager.GetTable("SELECT * FROM Chests");
 
-        List<ChestM> chests = new List<ChestM>();
+        List<DataChest> chests = new List<DataChest>();
 
         foreach (DataRow row in ChestsTable.Rows)
         {
-            ChestM chest = new ChestM
+            DataChest chest = new DataChest
             {
                 ID = Convert.ToInt32(row["ID"]),
                 Reward = row["Reward"].ToString(),
@@ -28,13 +28,13 @@ public class DataChestController
         return chests;
     }
 
-    public void AddChest(ChestM chest)
+    public void AddChest(DataChest chest)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO Chests ('Reward', 'PointsToComplete') " +
             $"VALUES ('{chest.Reward}', '{chest.PointsToComplete}');");
     }
 
-    public void UpdateChest(ChestM chest)
+    public void UpdateChest(DataChest chest)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE Chests " +
             $"SET Reward = '{chest.Reward}' PointsToComplete = {chest.PointsToComplete} " +

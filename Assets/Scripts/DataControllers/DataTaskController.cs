@@ -5,15 +5,15 @@ using DBUtils;
 
 public class DataTaskController
 {
-    public List<Task> GetAllTasks()
+    public List<DataTask> GetAllTasks()
     {
         DataTable tasksTable = DatabaseManager.GetTable("SELECT * FROM Tasks");
 
-        List<Task> tasks = new List<Task>();
+        List<DataTask> tasks = new List<DataTask>();
 
         foreach (DataRow row in tasksTable.Rows)
         {
-            Task task = new Task
+            DataTask task = new DataTask
             {
                 ID = Convert.ToInt32(row["ID"]),
                 Name = row["Name"].ToString(),
@@ -30,14 +30,14 @@ public class DataTaskController
         return tasks;
     }
 
-    public void AddTask(Task task)
+    public void AddTask(DataTask task)
     {
 
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO Tasks ('Name', 'AssignedUser', 'Estimate', 'Logged', 'Status', 'Reward') " +
             $"VALUES ('{task.Name}', '{task.AssignedUser}', '{task.Estimate}', '{task.Logged}', '{task.Status}', '{task.Reward}');");
     }
 
-    public void UpdateTask(Task task)
+    public void UpdateTask(DataTask task)
     {
 
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE Tasks " +

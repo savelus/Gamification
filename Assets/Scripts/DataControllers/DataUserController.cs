@@ -5,15 +5,15 @@ using DBUtils;
 
 public class DataUserController
 {
-    public List<User> GetAllUsers()
+    public List<DataUser> GetAllUsers()
     {
         DataTable chestInScalesTable = DatabaseManager.GetTable("SELECT * FROM User");
 
-        List<User> users = new List<User>();
+        List<DataUser> users = new List<DataUser>();
 
         foreach (DataRow row in chestInScalesTable.Rows)
         {
-            User user = new User
+            DataUser user = new DataUser
             {
                 Name =row["Name"].ToString(),
                 TeamId = Convert.ToInt32(row["TeamId"]),
@@ -27,13 +27,13 @@ public class DataUserController
         return users;
     }
 
-    public void AddUser(User user)
+    public void AddUser(DataUser user)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO User ('Name', 'TeamId', 'Position', 'WorkLoad') " +
             $"VALUES ('{user.Name}', '{user.TeamId}', '{user.Position}', '{user.WorkLoad}');");
     }
 
-    public void UpdateUser(User user)
+    public void UpdateUser(DataUser user)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE User " +
             $"SET Name = '{user.Name}' TeamId = '{user.TeamId}' Position = '{user.Position}' WorkLoad = '{user.WorkLoad}'" +

@@ -9,7 +9,8 @@ public class EntryPoint : MonoBehaviour
     private LoadPresenter _loadPresenter;
 
     [Inject]
-    public void Init(LoadPresenter loadPresenter) {
+    public void Init(LoadPresenter loadPresenter) 
+    {
         _loadPresenter = loadPresenter;
     }
 
@@ -19,7 +20,7 @@ public class EntryPoint : MonoBehaviour
        
         DataChestController controller = new ();
         var chests = controller.GetAllChests();
-        foreach (ChestM chest in chests)
+        foreach (DataChest chest in chests)
         {
             Debug.Log($"ID: {chest.ID}, Reward: {chest.Reward}, PointsToComplete: {chest.PointsToComplete}");
         }

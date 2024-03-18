@@ -5,15 +5,15 @@ using DBUtils;
 
 public class DataChestInScaleController
 {
-    public List<ChestInScale> GetAllChestInScales()
+    public List<DataChestInScale> GetAllChestInScales()
     {
         DataTable chestInScalesTable = DatabaseManager.GetTable("SELECT * FROM ChestInScale");
 
-        List<ChestInScale> chestInScales = new List<ChestInScale>();
+        List<DataChestInScale> chestInScales = new List<DataChestInScale>();
 
         foreach (DataRow row in chestInScalesTable.Rows)
         {
-            ChestInScale chestInScale = new ChestInScale
+            DataChestInScale chestInScale = new DataChestInScale
             {
                 ID = Convert.ToInt32(row["ID"]),
                 ChestId = Convert.ToInt32(row["ChestId"]),
@@ -25,13 +25,13 @@ public class DataChestInScaleController
         return chestInScales;
     }
 
-    public void AddChestInScale(ChestInScale chestInScale)
+    public void AddChestInScale(DataChestInScale chestInScale)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"INSERT INTO ChestInScale ('ChestId') " +
             $"VALUES ('{chestInScale.ChestId}');");
     }
 
-    public void UpdateChestInScale(ChestInScale chestInScale)
+    public void UpdateChestInScale(DataChestInScale chestInScale)
     {
         DatabaseManager.ExecuteQueryWithoutAnswer($"UPDATE ChestInScale " +
             $"SET ChestId = '{chestInScale.ChestId}'" +
