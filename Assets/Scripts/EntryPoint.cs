@@ -17,13 +17,5 @@ public class EntryPoint : MonoBehaviour
     private void Start()
     {
         _loadPresenter.Open();
-       
-        DataChestController controller = new ();
-        var chests = controller.GetAllChests();
-        foreach (DataChest chest in chests)
-        {
-            Debug.Log($"ID: {chest.ID}, Reward: {chest.Reward}, PointsToComplete: {chest.PointsToComplete}");
-        }
-        Debug.Log(chests.Count);
     }
 }

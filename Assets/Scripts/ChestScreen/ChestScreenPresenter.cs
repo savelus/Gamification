@@ -15,23 +15,22 @@ namespace ChestScreen
         public ChestScreenPresenter(ChestScreenView screenView)
         {
             InitializePresenter(screenView);
+            Open();
         }
 
         protected override void InitializeView()
         {
             ClearViewedChests();
-            SpawnChests(5);
-
-            SetupExampleChests();
+            // SpawnChests(5);
+            SetupExampleChests(3);
         }
 
-        private void SetupExampleChests()
+        private void SetupExampleChests(int chestsCount)
         {
-            AddChest("1");
-            AddChest("2");
-            AddChest("3");
-            AddChest("4");
-            AddChest("5");
+            for (int i = 0; i < chestsCount; i++)
+            {
+                AddChest($"{i + 1}");
+            }
         }
 
         public void AddChest(string chestText)
@@ -41,9 +40,11 @@ namespace ChestScreen
                 SpawnOneChest();
             }
 
+            ChestProgressSlider.Singleton.SegmentsCount += 1;
+
             var Chest = _notUsableChests.Dequeue();
             _viewedChests.Add(Chest);
-            Chest.InitializeChest(Color.red, Color.green, chestText, ChestStateChanged);
+            Chest.InitializeChest(Color.white, Color.white, chestText, ChestStateChanged, ChestProgressSlider.Singleton.SegmentsCount);
         }
 
         private void SpawnChests(int chestsCount)
@@ -72,8 +73,16 @@ namespace ChestScreen
 
         private void ChestStateChanged(Chest chest)
         {
-            if (chest.ChestComplete) CompleteChest(chest);
-            UnCompleteChest(chest);
+            if (chest.ChestId <= ChestProgressSlider.Singleton.chestID)
+            {
+                chest.IsActive = true;
+                Debug.Log($"Сундук активен!");
+
+                if (chest.IsActive) CompleteChest(chest);
+                else UnCompleteChest(chest);
+            } 
+            else 
+            { chest.IsActive = true; }
         }
 
         private void UnCompleteChest(Chest chest)
